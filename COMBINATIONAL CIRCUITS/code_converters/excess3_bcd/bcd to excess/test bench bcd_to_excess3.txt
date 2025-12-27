@@ -1,0 +1,26 @@
+module test_bench;
+  reg [2:0] bcd;
+  wire excess3;
+  
+  bcd_to_excess3 BE ( bcd, excess3);
+  
+  initial
+    begin
+       bcd = 3'b000; #10; 
+       bcd = 3'b001; #10; 
+       bcd = 3'b010; #10; 
+       bcd = 3'b011; #10; 
+       bcd = 3'b100; #10; 
+       bcd = 3'b101; #10; 
+       bcd = 3'b110; #10; 
+       bcd = 3'b111; #10;
+      $finish;
+    end
+  
+  initial
+    begin
+      $dumpfile ( "wave.vcd");
+      $dumpvars (0, test_bench);
+    end
+  
+endmodule

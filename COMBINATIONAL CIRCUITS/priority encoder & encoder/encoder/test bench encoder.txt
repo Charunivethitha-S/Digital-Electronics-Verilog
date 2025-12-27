@@ -1,0 +1,24 @@
+module test_bench;
+
+  reg  [3:0] in;
+  wire [1:0] y;
+
+  encoder_4x2 uut (
+    .in(in),
+    .y(y)
+  );
+
+  initial begin
+    in = 4'b0001; #10;
+    in = 4'b0010; #10;
+    in = 4'b0100; #10;
+    in = 4'b1000; #10;
+    $finish;
+  end
+
+  initial begin
+    $dumpfile("wave.vcd");
+    $dumpvars(0, test_bench);
+  end
+
+endmodule

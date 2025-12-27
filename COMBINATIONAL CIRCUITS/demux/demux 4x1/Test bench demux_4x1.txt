@@ -1,0 +1,39 @@
+// Code your testbench here
+// or browse Examples
+module test_bench;
+  reg a;
+  reg [1:0] sel;
+  wire y0, y1, y2, y3;
+  
+  demux_4_1 dut ( a, sel, y0, y1, y2, y3 );
+  
+  initial
+    begin
+      {sel, a} = 0;
+    end
+  
+  initial
+    begin
+      a = 1'b0;
+      sel = 2'b00; #10;
+      sel = 2'b01; #10;
+      sel = 2'b10; #10;
+      sel = 2'b11; #10;
+      
+    a = 1'b1;
+      sel = 2'b00; #10;
+      sel = 2'b01; #10;
+      sel = 2'b10; #10;
+      sel = 2'b11; #10;
+      $finish;
+    end
+      
+      initial
+        begin
+          $dumpfile ( "wave.vcd" );
+          $dumpvars ( 0, test_bench);
+        end
+      
+   
+endmodule
+    

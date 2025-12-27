@@ -1,0 +1,43 @@
+module test_bench;
+  reg a;
+  reg [2:0] sel;
+  
+  wire d0, d1, d2, d3, d4, d5, d6, d7;
+  
+  demux_8x1 demux ( a, sel, d0, d1, d2, d3, d4, d5, d6, d7);
+  
+  initial
+    begin
+      a = 1'b1;
+      
+      sel = 3'b000; #10;
+      sel = 3'b001; #10;
+      sel = 3'b010; #10;
+      sel = 3'b011; #10;
+      sel = 3'b100; #10;
+      sel = 3'b101; #10;
+      sel = 3'b110; #10;
+      sel = 3'b111; #10;
+      
+    a = 1'b0; 
+      
+      sel = 3'b000; #10;
+      sel = 3'b001; #10;
+      sel = 3'b010; #10;
+      sel = 3'b011; #10;
+      sel = 3'b100; #10;
+      sel = 3'b101; #10;
+      sel = 3'b110; #10;
+      sel = 3'b111; #10;
+      
+    $finish;
+    end
+  
+  initial
+    begin
+      $dumpfile ( "wave.vcd" );
+      $dumpvars ( 0, test_bench);
+    end
+endmodule
+      
+      

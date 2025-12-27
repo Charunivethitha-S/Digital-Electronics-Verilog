@@ -1,0 +1,25 @@
+module test_bench;
+  reg [7:0] in;
+  wire [2:0] y;
+  wire v;
+  
+  priority_encoder_8x3 PE ( in, y, v);
+  
+  initial
+    begin
+      in = 8'b00000100; #10;
+      in = 8'b00110011; #10;
+      in = 8'b00011010; #10;
+      in = 8'b10010101; #10;
+      in = 8'b11100100; #10;
+      in = 8'b00111101; #10;
+    $finish;
+    end
+  
+  initial
+    begin
+      $dumpfile ( "wave.vcd" );
+      $dumpvars (0, test_bench);
+    end
+  
+endmodule

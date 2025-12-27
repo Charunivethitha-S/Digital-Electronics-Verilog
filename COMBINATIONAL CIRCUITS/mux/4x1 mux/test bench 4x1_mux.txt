@@ -1,0 +1,32 @@
+module tb_mux_4_1;
+
+  reg a, b, c, d;
+  reg [1:0] sel;
+  wire y;
+
+  mux_4_1 dut (
+    .a(a), .b(b), .c(c), .d(d),
+    .sel(sel),
+    .y(y)
+  );
+
+  initial begin
+    {a,b,c,d} = 0;
+    sel = 2'b00;
+
+    #10 a = 1; sel = 2'b00;  
+    #10 b = 1; sel = 2'b01;  
+    #10 c = 1; sel = 2'b10;  
+    #10 d = 1; sel = 2'b11;  
+
+    #10 $finish;
+  end
+
+  initial 
+    begin
+      $dumpfile ("wave.vcd");
+      $dumpvars (0, tb_mux_4_1);
+    end
+  
+  
+endmodule

@@ -1,0 +1,33 @@
+module test_bench;
+  
+  reg [2:0] a;
+  reg [2:0] b;
+  wire gt, lt, eq;
+  
+  magnitude_comparator MC ( a, b, gt, lt, eq);
+  
+  initial
+    begin
+      { a, b } = 0;
+    end
+  
+  
+  
+  initial
+    begin
+      a = 3'b000; b = 3'b001; #10;
+      a = 3'b100; b = 3'b011; #10;
+      a = 3'b010; b = 3'b101; #10;
+      a = 3'b111; b = 3'b111; #10;
+    $finish;
+    end
+  
+  initial
+    begin
+      $dumpfile("wave.vcd");
+      $dumpvars(0, test_bench);
+    end
+  
+  
+ 
+endmodule

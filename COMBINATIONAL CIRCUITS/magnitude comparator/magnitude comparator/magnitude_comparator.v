@@ -1,0 +1,25 @@
+module magnitude_comparator ( input [2:0] a, [2:0] b, output reg gt, lt, eq);
+  
+  always@(*)
+    begin
+      if ( a > b )
+        begin
+        gt = 1;
+        lt = 0;
+        eq = 0;
+        end
+      else if ( a < b )
+        begin
+          gt = 0;
+          lt = 1;
+          eq = 0;
+        end
+      else
+        begin 
+          gt = 0; 
+          lt = 0;
+          eq = 1;
+        end
+    end
+endmodule
+      

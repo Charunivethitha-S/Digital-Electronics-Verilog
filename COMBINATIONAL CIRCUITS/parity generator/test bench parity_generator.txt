@@ -1,0 +1,24 @@
+module test_bench;
+  
+  reg [3:0] in;
+  wire x,y;
+  
+  parity_odd PO ( in, x);
+  parity_even PE ( in, y);
+  
+  initial
+    begin
+      in = 4'b0001; #10;
+      in = 4'b1010; #10;
+      in = 4'b0110; #10;
+      in = 4'b1111; #10;
+    $finish;
+    end
+ 
+  initial
+    begin
+      $dumpfile("wave.vcd");
+      $dumpvars(0, test_bench);
+    end
+  
+endmodule
