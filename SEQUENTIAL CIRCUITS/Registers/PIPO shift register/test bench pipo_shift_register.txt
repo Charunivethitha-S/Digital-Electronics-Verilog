@@ -1,0 +1,43 @@
+`timescale 1ns/1ps
+
+module pipo_shift_register_tb;
+
+    reg clk;
+    reg reset;
+    reg [3:0] parallel_in;
+    wire [3:0] parallel_out;
+
+    
+    pipo_shift_register dut (
+        .clk(clk),
+        .reset(reset),
+        .parallel_in(parallel_in),
+        .parallel_out(parallel_out)
+    );
+
+    
+    always #5 clk = ~clk;
+
+    initial begin
+        
+        clk = 0;
+        reset = 1;
+        parallel_in = 4'b0000;
+
+         reset = 0; #10;
+
+        parallel_in = 4'b1010; #10;
+        parallel_in = 4'b0101; #10;
+        parallel_in = 4'b1111; #10;
+        parallel_in = 4'b0011; #10;
+
+        #20 $finish;
+    end
+  
+  initial
+    begin
+      $dumpfile ("wave.vcd");
+      $dumpvars (0, pipo_shift_register_tb);
+    end
+
+endmodule

@@ -1,0 +1,40 @@
+module tb_t_flip_flop;
+
+    reg clk, reset, T;
+    wire Q;
+
+    
+    t_flip_flop uut (
+        .clk(clk),
+        .reset(reset),
+        .T(T),
+        .Q(Q)
+    );
+
+    
+    always #5 clk = ~clk;
+
+    initial begin
+        
+        clk = 0;
+        reset = 1;
+        T = 0;
+
+        #10 reset = 0;
+
+        
+        T = 1; #20;  // Should toggle Q
+        T = 0; #20;  // Q should hold
+        T = 1; #20;  // Toggle again
+        T = 1; #20;  
+
+        #20 $stop;
+    end
+  
+  initial
+    begin
+      $dumpfile ("wave.vcd");
+      $dumpvars(0,  tb_t_flip_flop);
+    end
+
+endmodule

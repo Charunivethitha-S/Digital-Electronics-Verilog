@@ -1,0 +1,26 @@
+// Code your testbench here
+// or browse Examples
+module test_bench;
+  reg clk, reset, mode;
+  wire [3:0] q;
+  
+  asynchronous_up_counter dut ( clk, reset, q);
+  
+  always #5 clk = ~clk; 
+  
+  initial
+    begin
+     clk =0;
+      reset = 1;
+      
+      #10 reset = 0;
+      #200
+  $finish;
+    end
+  
+  initial
+    begin
+      $dumpfile ( "wave.vcd");
+      $dumpvars (0, test_bench);
+    end
+endmodule

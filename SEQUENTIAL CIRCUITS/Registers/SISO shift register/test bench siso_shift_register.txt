@@ -1,0 +1,38 @@
+module test_bench;
+  reg clk, reset, sin,enable;
+  wire sout;
+  
+  siso_shift_register siso ( clk, reset, sin, enable, sout);
+  
+  initial
+    begin
+      {clk, sin,enable, reset } = 0;
+    
+    end
+  
+  always #5 clk = ~clk;
+  
+  initial
+    begin
+      
+      reset = 1; #10;
+      reset = 0; #10;
+      enable = 0; #10;
+      enable = 1; 
+      sin = 1'b1; #10;
+      sin = 1'b0; #10;
+      sin = 1'b1; #10;
+      sin = 1'b1; #10;
+      
+      enable = 0; #50;
+      
+      $finish;
+    end
+  
+  initial
+    begin
+      $dumpfile ( "wave.vcd");
+      $dumpvars (0, test_bench);
+    end
+endmodule
+   

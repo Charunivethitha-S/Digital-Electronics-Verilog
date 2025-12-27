@@ -1,0 +1,31 @@
+module tb_modn_counter;
+
+    reg clk, reset;
+    wire [3:0] q; // 4-bit counter for N=10
+
+    // Instantiate counter
+    modn_counter #(.N(10), .WIDTH(4)) uut (
+        .clk(clk),
+        .reset(reset),
+        .q(q)
+    );
+
+    // Clock generation
+    always #5 clk = ~clk; // 10 ns period
+
+    initial begin
+        clk = 0;
+        reset = 1; 
+        #10 reset = 0;
+
+        // Let it run for some cycles
+        #200 $stop;
+    end
+  
+  initial
+    begin
+      $dumpfile ("wave.vcd");
+      $dumpvars (0, tb_modn_counter);
+    end
+
+endmodule

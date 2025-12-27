@@ -1,0 +1,27 @@
+module test_bench;
+  reg clk, d;
+  wire q, qbar;
+  
+  d_flip_flop DFF ( clk,d,q,qbar);
+  
+  always #5 clk = ~clk;
+  
+  initial
+    begin
+      {clk,d} = 0;
+    end
+  
+  initial
+    begin
+      d = 1'b0; #10;
+      d = 1'b1; #10;
+      
+      $finish;
+    end
+  
+  initial
+    begin 
+      $dumpfile ("wave.vcd");
+      $dumpvars ( 0, test_bench);
+                                end
+endmodule

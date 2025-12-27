@@ -1,0 +1,30 @@
+module test_bench;
+  reg clk, s, r;
+  wire q, qbar;
+  
+  sr_flip_flop SR ( clk, s, r, q, qbar);
+  
+  always #5 clk = ~clk;
+  
+  initial
+    begin
+  {clk, s, r} =0;
+  end
+  
+  initial
+    begin
+      s =0; r=0; 
+      s =0; r=1; #10;
+      s =1; r=0; #10;
+      s =1; r=1; #10;
+      
+   $finish;
+    end
+  
+  initial
+    begin
+      $dumpfile ( "wave.vcd");
+      $dumpvars (0, test_bench);
+    end
+  
+endmodule

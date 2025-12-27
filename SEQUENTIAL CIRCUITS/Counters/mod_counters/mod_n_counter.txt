@@ -1,0 +1,19 @@
+module modn_counter #(
+    parameter N = 10,        // Default modulo value
+    parameter WIDTH = 4      // Width of the counter (ceil(log2(N)))
+)(
+    input clk,
+    input reset,             // synchronous reset
+    output reg [WIDTH-1:0] q
+);
+
+    always @(posedge clk) begin
+        if (reset)
+            q <= 0;          // Reset counter to 0
+        else if (q == N-1)
+            q <= 0;          // Wrap around
+        else
+            q <= q + 1;      // Increment
+    end
+
+endmodule
